@@ -1219,12 +1219,12 @@
   const scriptTag = document.currentScript;
   const botId = scriptTag.getAttribute("data-bot-id");
   const clientId = scriptTag.getAttribute("data-client-id");
-  const configUrl = scriptTag.getAttribute("data-config-url");
+  // const configUrl = scriptTag.getAttribute("data-config-url");
   const selector =
     scriptTag.getAttribute("data-selector") || "#botpress-container";
 
   // Validate required attributes
-  if (!botId || !clientId || !configUrl) {
+  if (!botId || !clientId) {
     console.error(
       "Botpress: Missing required attributes (botId, clientId, configUrl).",
       { botId, clientId, configUrl }
