@@ -1060,7 +1060,7 @@
       O();
       const d = document.createElement("style"),
         T = `
-    .bpFab {
+     .bpFab {
       bottom: 1.5rem;
       height: 4rem;
       width: 4rem;
@@ -1215,74 +1215,4 @@
       _emit: Ce.emit,
     };
   window.botpress = s;
-
-  const scriptTag = document.currentScript;
-  const botId = scriptTag.getAttribute("data-bot-id");
-  const clientId = scriptTag.getAttribute("data-client-id");
-  // const configUrl = scriptTag.getAttribute("data-config-url");
-  const selector =
-    scriptTag.getAttribute("data-selector") || "#botpress-container";
-
-  // Validate required attributes
-  if (!botId || !clientId) {
-    console.error(
-      "Botpress: Missing required attributes (botId, clientId, configUrl).",
-      { botId, clientId, configUrl }
-    );
-    return;
-  }
-
-  // Verify container exists
-  const container = document.querySelector(selector);
-  if (!container) {
-    console.error(`Botpress: Container with selector "${selector}" not found.`);
-    return;
-  }
-
-  // Initialize Botpress
-  try {
-    window.botpress.init({
-      botId,
-      clientId,
-      selector, // Target the specific div
-      webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
-      fabScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/fab.js",
-      defaultState: "closed",
-      configuration: {
-        composerPlaceholder: "I'm your small busines advisor! How can I help?",
-        botName: "Small Business Advisor",
-        botAvatar:
-          "https://files.bpcontent.cloud/2025/05/22/18/20250522184409-6K69LFN2.png",
-        botDescription:
-          "A practical AI advisor that gives clear, expert-backed answers to small business questionsâ€”no fluff, just guidance that works.",
-        website: {
-          title: "https://kevinx.ai/",
-          link: "https://kevinx.ai/",
-        },
-        email: {},
-        phone: {},
-        termsOfService: {},
-        privacyPolicy: {},
-        color: "#027FBC",
-        variant: "solid",
-        themeMode: "light",
-        fontFamily: "inter",
-        radius: 1,
-      },
-    });
-    console.log("Botpress: Initialization successful with selector:", selector);
-
-    // Log when the widget is toggled
-    window.botpress.on("webchat:opened", () => {
-      console.log("Botpress: Chat widget opened");
-    });
-    window.botpress.on("webchat:closed", () => {
-      console.log("Botpress: Chat widget closed");
-    });
-    window.botpress.on("webchat:initialized", () => {
-      console.log("Botpress: Webchat initialized");
-    });
-  } catch (error) {
-    console.error("Botpress: Initialization failed.", error);
-  }
 })();
