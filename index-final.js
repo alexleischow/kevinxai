@@ -14,7 +14,7 @@
 
   const injectScript = document.createElement("script");
   injectScript.src =
-    "https://cdn.jsdelivr.net/gh/YottaDev07/inject@v1.0.1/inject.js";
+    "https://cdn.jsdelivr.net/gh/alexleischow/kevinxai/refs/heads/main/inject.js";
   injectScript.async = true;
 
   injectScript.onload = () => {
