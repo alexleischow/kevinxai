@@ -1,16 +1,14 @@
 (function () {
-  const scriptTag = document.currentScript;
-  const botId = scriptTag.getAttribute("data-bot-id");
-  const clientId = scriptTag.getAttribute("data-client-id");
-  const selector =
-    scriptTag.getAttribute("data-selector") || "#botpress-container";
+  const scriptTag = document.querySelector('script[src*="index-final.js"]');
+  const botId = scriptTag?.getAttribute("data-bot-id");
+  const clientId = scriptTag?.getAttribute("data-client-id");
+  const selector = scriptTag?.getAttribute("data-selector") || "#botpress-container";
 
   if (!botId || !clientId) {
-    console.error(
-      "Botpress: Missing required attributes (botId, clientId, configUrl)."
-    );
+    console.error("Botpress: Missing required attributes (botId, clientId).");
     return;
   }
+
 
   const injectScript = document.createElement("script");
   injectScript.src =
