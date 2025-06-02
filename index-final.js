@@ -15,10 +15,7 @@
 
   webchatScript.onload = () => {
     const wait = setInterval(() => {
-      if (
-        window.botpress &&
-        typeof window.botpress.init === "function"
-      ) {
+      if (window.botpress && typeof window.botpress.init === "function") {
         clearInterval(wait);
 
         window.botpress.init({
@@ -28,18 +25,18 @@
           webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
           configuration: {
             layout: "embedded",
+            composerPlaceholder: "I'm your small business advisor! How can I help?",
             botName: "Small Business Advisor",
+            botAvatar: "https://files.bpcontent.cloud/2025/05/22/18/20250522184409-6K69LFN2.png",
             themeMode: "light",
-            fontFamily: "inter",
-            radius: 1,
             showCloseButton: false,
-            composerPlaceholder: "How can I help?"
+            radius: 1
           }
         });
 
-        // Force open the chat after init
+        // 👇 THIS is what actually opens the chat
         setTimeout(() => {
-          if (typeof window.botpress.open === "function") {
+          if (window.botpress && typeof window.botpress.open === "function") {
             window.botpress.open();
           }
         }, 500);
@@ -49,4 +46,3 @@
 
   document.body.appendChild(webchatScript);
 })();
-
