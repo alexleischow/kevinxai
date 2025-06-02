@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Botpress Config Test</title>
     <style>
-      #botpress-container {
-        width: 600px;
-        height: 600px;
-        border: 1px solid #ccc;
-        position: relative;
-      }
-    </style>
+  #botpress-container {
+    width: 100%;
+    height: 600px;
+    border: 1px solid #ccc;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Optional: Prevent overflow + hide chat bubble */
+  .bpFab {
+    display: none !important;
+  }
+</style>
+
   </head>
   <body>
     <div id="botpress-container"></div>
