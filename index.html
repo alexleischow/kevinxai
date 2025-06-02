@@ -48,16 +48,24 @@
       <head>
         <meta charset="UTF-8">
         <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
-        <script src="https://files.bpcontent.cloud/2025/03/28/14/20250328140011-UO2T74JF.js"></script>
+      </head>
+      <body style="margin:0;">
         <script>
-          window.botpress.on("webchat:ready", () => {
-            window.botpress.open();
+          window.addEventListener("load", function () {
+            var script = document.createElement("script");
+            script.src = "https://files.bpcontent.cloud/2025/03/28/14/20250328140011-UO2T74JF.js";
+            script.onload = function () {
+              if (window.botpress && window.botpress.open) {
+                window.botpress.open();
+              }
+            };
+            document.body.appendChild(script);
           });
         </script>
-      </head>
-      <body style="margin:0;"></body>
+      </body>
     </html>'>
 </iframe>
+
           </div>
         </div>
       </div>    
