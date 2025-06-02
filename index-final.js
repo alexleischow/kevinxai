@@ -9,45 +9,18 @@
     return;
   }
 
-  const webchatScript = document.createElement("script");
-  webchatScript.src = "https://cdn.botpress.cloud/webchat/v2.5/webchat.js";
-  webchatScript.async = true;
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://cdn.botpress.cloud/webchat/v2/index.html?botId=${botId}&clientId=${clientId}&hideWidget=true&config.chatDisabled=false&open=true`;
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "none";
+  iframe.allow = "clipboard-write";
 
-  webchatScript.onload = () => {
-    const wait = setInterval(() => {
-      if (
-        window.botpress &&
-        typeof window.botpress.init === "function"
-      ) {
-        clearInterval(wait);
-
-        window.botpress.init({
-  botId,
-  clientId,
-  selector,
-  webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
-  defaultState: "opened",
-  configuration: {
-    composerPlaceholder: "I'm your small business advisor! How can I help?",
-    botName: "Small Business Advisor",
-    botAvatar: "https://files.bpcontent.cloud/2025/05/22/18/20250522184409-6K69LFN2.png",
-    botDescription: "A practical AI advisor that gives clear, expert-backed answers to small business questions.",
-    variant: "solid",
-    themeMode: "light",
-    fontFamily: "inter",
-    radius: 1,
-    showCloseButton: false,
-    layout: "embedded" // ✅ this is the key
+  const container = document.querySelector(selector);
+  if (container) {
+    container.appendChild(iframe);
+  } else {
+    console.error(`Could not find element "${selector}"`);
   }
-});
-      }
-    }, 100);
-  };
-
-  webchatScript.onerror = () => {
-    console.error("❌ Failed to load Botpress webchat.js");
-  };
-
-  document.body.appendChild(webchatScript);
 })();
 
