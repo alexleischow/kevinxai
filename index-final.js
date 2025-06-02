@@ -25,36 +25,26 @@
         clearInterval(wait);
 
         window.botpress.init({
-          botId,
-          clientId,
-          selector,
-          webchatScriptUrl:
-            "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
-          fabScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/fab.js",
-          defaultState: "closed",
-          configuration: {
-            composerPlaceholder:
-              "I'm your small busines advisor! How can I help?",
-            botName: "Small Business Advisor",
-            botAvatar:
-              "https://files.bpcontent.cloud/2025/05/22/18/20250522184409-6K69LFN2.png",
-            botDescription:
-              "A practical AI advisor that gives clear, expert-backed answers to small business questionsâ€”no fluff, just guidance that works.",
-            website: {
-              title: "https://kevinx.ai/",
-              link: "https://kevinx.ai/",
-            },
-            email: {},
-            phone: {},
-            termsOfService: {},
-            privacyPolicy: {},
-            color: "#027FBC",
-            variant: "solid",
-            themeMode: "light",
-            fontFamily: "inter",
-            radius: 1,
-          },
-        });
+  botId,
+  clientId,
+  selector,
+  webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
+  defaultState: "opened",
+  configuration: {
+    composerPlaceholder: "I'm your small business advisor! How can I help?",
+    botName: "Small Business Advisor",
+    botAvatar: "https://files.bpcontent.cloud/2025/05/22/18/20250522184409-6K69LFN2.png",
+    botDescription: "A practical AI advisor that gives clear, expert-backed answers to small business questions.",
+    variant: "solid",
+    themeMode: "light",
+    fontFamily: "inter",
+    radius: 1,
+    // Optional: hide the close button completely
+    enableTranscriptDownload: false,
+    showCloseButton: false
+  }
+});
+
       }
     }, 100);
   };
