@@ -2,7 +2,6 @@
   const scriptTag = document.querySelector('script[src*="index-final.js"]');
   const botId = scriptTag?.getAttribute("data-bot-id");
   const clientId = scriptTag?.getAttribute("data-client-id");
-  const selector = scriptTag?.getAttribute("data-selector") || "#botpress-container";
 
   if (!botId || !clientId) {
     console.error("Botpress: Missing required attributes.");
@@ -21,19 +20,18 @@
         window.botpress.init({
           botId,
           clientId,
-          selector,
           webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
+          // No "layout" here
           configuration: {
-            layout: "embedded",
             botName: "Small Business Advisor",
             composerPlaceholder: "Ask me anything!",
-            showCloseButton: false,
+            showCloseButton: true,
             radius: 1,
             themeMode: "light"
           }
         });
 
-        // ✅ Force open as soon as it's ready
+        // ✅ Open chat after it's ready
         const check = setInterval(() => {
           if (window.botpress?.open) {
             window.botpress.open();
