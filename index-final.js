@@ -10,7 +10,7 @@
   }
 
   const iframe = document.createElement("iframe");
-  iframe.src = `https://cdn.botpress.cloud/webchat/v2/index.html?botId=${botId}&clientId=${clientId}&hideWidget=true&config.chatDisabled=false&open=true`;
+  iframe.src = `https://cdn.botpress.cloud/webchat/v2/index.html?botId=${botId}&clientId=${clientId}&open=true&layout=embedded`;
   iframe.style.width = "100%";
   iframe.style.height = "100%";
   iframe.style.border = "none";
