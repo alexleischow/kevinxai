@@ -15,7 +15,10 @@
 
   webchatScript.onload = () => {
     const wait = setInterval(() => {
-      if (window.botpress && typeof window.botpress.init === "function") {
+      if (
+        window.botpress &&
+        typeof window.botpress.init === "function"
+      ) {
         clearInterval(wait);
 
         window.botpress.init({
@@ -23,25 +26,25 @@
           clientId,
           selector,
           webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
+          defaultState: "opened",
           configuration: {
-            layout: "embedded",
             composerPlaceholder: "I'm your small business advisor! How can I help?",
             botName: "Small Business Advisor",
             botAvatar: "https://files.bpcontent.cloud/2025/05/22/18/20250522184409-6K69LFN2.png",
+            botDescription: "A practical AI advisor that gives clear, expert-backed answers to small business questions.",
+            variant: "solid",
             themeMode: "light",
-            showCloseButton: false,
-            radius: 1
+            fontFamily: "inter",
+            radius: 1,
+            showCloseButton: false
           }
         });
-
-        // 👇 THIS is what actually opens the chat
-        setTimeout(() => {
-          if (window.botpress && typeof window.botpress.open === "function") {
-            window.botpress.open();
-          }
-        }, 500);
       }
     }, 100);
+  };
+
+  webchatScript.onerror = () => {
+    console.error("❌ Failed to load Botpress webchat.js");
   };
 
   document.body.appendChild(webchatScript);
