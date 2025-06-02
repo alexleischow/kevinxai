@@ -23,7 +23,6 @@
           clientId,
           selector,
           webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
-          defaultState: "closed", // We'll toggle it open after
           configuration: {
             layout: "embedded",
             botName: "Small Business Advisor",
@@ -34,10 +33,11 @@
           }
         });
 
-        // 💡 Open it after init
-        setTimeout(() => {
-          if (window.botpress.open) {
+        // ✅ Force open as soon as it's ready
+        const check = setInterval(() => {
+          if (window.botpress?.open) {
             window.botpress.open();
+            clearInterval(check);
           }
         }, 300);
       }
