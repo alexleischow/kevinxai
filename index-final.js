@@ -5,21 +5,48 @@
   const selector = scriptTag?.getAttribute("data-selector") || "#botpress-container";
 
   if (!botId || !clientId) {
-    console.error("Botpress: Missing required attributes (botId, clientId).");
+    console.error("Botpress: Missing required attributes.");
     return;
   }
 
-  const iframe = document.createElement("iframe");
-  iframe.src = `https://cdn.botpress.cloud/webchat/v2/index.html?botId=${botId}&clientId=${clientId}&hideWidget=true&config.chatDisabled=false&open=true`;
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "none";
-  iframe.allow = "clipboard-write";
+  const script = document.createElement("script");
+  script.src = "https://cdn.botpress.cloud/webchat/v2.5/webchat.js";
+  script.async = true;
 
-  const container = document.querySelector(selector);
-  if (container) {
-    container.appendChild(iframe);
-  } else {
-    console.error(`Could not find element "${selector}"`);
-  }
+  script.onload = () => {
+    const wait = setInterval(() => {
+      if (window.botpress?.init) {
+        clearInterval(wait);
+
+        window.botpress.init({
+          botId,
+          clientId,
+          selector,
+          webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
+          defaultState: "closed", // We'll toggle it open after
+          configuration: {
+            layout: "embedded",
+            botName: "Small Business Advisor",
+            composerPlaceholder: "Ask me anything!",
+            showCloseButton: false,
+            radius: 1,
+            themeMode: "light"
+          }
+        });
+
+        // 💡 Open it after init
+        setTimeout(() => {
+          if (window.botpress.open) {
+            window.botpress.open();
+          }
+        }, 300);
+      }
+    }, 100);
+  };
+
+  script.onerror = () => {
+    console.error("❌ Failed to load webchat.js");
+  };
+
+  document.body.appendChild(script);
 })();
