@@ -9,18 +9,44 @@
     return;
   }
 
-  const iframe = document.createElement("iframe");
-  iframe.src = `https://cdn.botpress.cloud/webchat/v2/index.html?botId=${botId}&clientId=${clientId}&open=true&layout=embedded`;
-  iframe.style.width = "100%";
-  iframe.style.height = "100%";
-  iframe.style.border = "none";
-  iframe.allow = "clipboard-write";
+  const webchatScript = document.createElement("script");
+  webchatScript.src = "https://cdn.botpress.cloud/webchat/v2.5/webchat.js";
+  webchatScript.async = true;
 
-  const container = document.querySelector(selector);
-  if (container) {
-    container.appendChild(iframe);
-  } else {
-    console.error(`Could not find element "${selector}"`);
-  }
+  webchatScript.onload = () => {
+    const wait = setInterval(() => {
+      if (
+        window.botpress &&
+        typeof window.botpress.init === "function"
+      ) {
+        clearInterval(wait);
+
+        window.botpress.init({
+          botId,
+          clientId,
+          selector,
+          webchatScriptUrl: "https://cdn.botpress.cloud/webchat/v2.5/webchat.js",
+          configuration: {
+            layout: "embedded",
+            botName: "Small Business Advisor",
+            themeMode: "light",
+            fontFamily: "inter",
+            radius: 1,
+            showCloseButton: false,
+            composerPlaceholder: "How can I help?"
+          }
+        });
+
+        // Force open the chat after init
+        setTimeout(() => {
+          if (typeof window.botpress.open === "function") {
+            window.botpress.open();
+          }
+        }, 500);
+      }
+    }, 100);
+  };
+
+  document.body.appendChild(webchatScript);
 })();
 
