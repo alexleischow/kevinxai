@@ -1,111 +1,111 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Botpress Inline Widget</title>
-  <style>
+<html>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <p>Hello, world!</p>
+    <!-- Botpress Always-Visible Widget -->
+<div class="botpress-widget-container">
+    <div id="botpress-inline-widget">
+        <div style="padding: 20px; text-align: center; color: #666;">Loading chatbot...</div>
+    </div>
+</div>
+
+<style>
+.botpress-widget-container {
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    margin: 20px auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* Override Botpress default positioning */
+#bp-widget {
+    position: relative !important;
+    bottom: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    z-index: 1 !important;
+}
+
+.bpw-layout {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.bpw-chat-container {
+    height: 100% !important;
+}
+
+@media (max-width: 768px) {
     .botpress-widget-container {
-        width: 100%;
-        max-width: 800px;
-        height: 500px;
-        margin: 20px auto;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        position: relative;
+        height: 400px;
+        margin: 10px;
     }
+}
+</style>
 
-    /* Override Botpress default positioning */
-    #bp-widget {
-        position: relative !important;
-        bottom: auto !important;
-        right: auto !important;
-        width: 100% !important;
-        height: 100% !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        z-index: 1 !important;
-    }
+<script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/03/28/14/20250328140011-UO2T74JF.js"></script>
+<script>
+window.addEventListener('load', function() {
+    // Wait for Botpress to be available
+    function initWidget() {
+        if (typeof window.botpress !== 'undefined') {
+            // Initialize Botpress
+            window.botpress.init({
+                hideWidget: false,
+                disableAnimations: false,
+                theme: "prism",
+                themeColor: "#2563eb"
+            });
 
-    .bpw-layout {
-        position: relative !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-    .bpw-chat-container {
-        height: 100% !important;
-    }
-
-    @media (max-width: 768px) {
-        .botpress-widget-container {
-            height: 400px;
-            margin: 10px;
-        }
-    }
-  </style>
-</head>
-<body>
-  <!-- Botpress Always-Visible Widget -->
-  <div class="botpress-widget-container">
-      <div id="botpress-inline-widget">
-          <div style="padding: 20px; text-align: center; color: #666;">Loading chatbot...</div>
-      </div>
-  </div>
-
-  <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2025/03/28/14/20250328140011-UO2T74JF.js"></script>
-  <script>
-    window.addEventListener('load', function() {
-        // Wait for Botpress to be available
-        function initWidget() {
-            if (typeof window.botpress !== 'undefined') {
-                // Initialize Botpress
-                window.botpress.init({
-                    hideWidget: false,
-                    disableAnimations: false,
-                    theme: "prism",
-                    themeColor: "#2563eb"
-                });
-
-                // Wait a moment for initialization
-                setTimeout(function() {
-                    // Move the widget into our container
-                    const container = document.getElementById('botpress-inline-widget');
-                    const bpWidget = document.getElementById('bp-widget');
+            // Wait a moment for initialization
+            setTimeout(function() {
+                // Move the widget into our container
+                const container = document.getElementById('botpress-inline-widget');
+                const bpWidget = document.getElementById('bp-widget');
+                
+                if (container && bpWidget) {
+                    // Clear loading message
+                    container.innerHTML = '';
                     
-                    if (container && bpWidget) {
-                        // Clear loading message
-                        container.innerHTML = '';
-                        
-                        // Move the botpress widget into our container
-                        container.appendChild(bpWidget);
-                        
-                        // Force the widget to show
-                        if (window.botpress.sendEvent) {
-                            window.botpress.sendEvent({ type: 'show' });
-                        }
-                        
-                        // Apply inline styles to override positioning
-                        bpWidget.style.position = 'relative';
-                        bpWidget.style.bottom = 'auto';
-                        bpWidget.style.right = 'auto';
-                        bpWidget.style.width = '100%';
-                        bpWidget.style.height = '100%';
-                        bpWidget.style.boxShadow = 'none';
-                        bpWidget.style.borderRadius = '0';
+                    // Move the botpress widget into our container
+                    container.appendChild(bpWidget);
+                    
+                    // Force the widget to show
+                    if (window.botpress.sendEvent) {
+                        window.botpress.sendEvent({ type: 'show' });
                     }
-                }, 1000);
-            } else {
-                // Retry if Botpress hasn't loaded yet
-                setTimeout(initWidget, 500);
-            }
+                    
+                    // Apply inline styles to override positioning
+                    bpWidget.style.position = 'relative';
+                    bpWidget.style.bottom = 'auto';
+                    bpWidget.style.right = 'auto';
+                    bpWidget.style.width = '100%';
+                    bpWidget.style.height = '100%';
+                    bpWidget.style.boxShadow = 'none';
+                    bpWidget.style.borderRadius = '0';
+                }
+            }, 1000);
+        } else {
+            // Retry if Botpress hasn't loaded yet
+            setTimeout(initWidget, 500);
         }
-        
-        initWidget();
-    });
-  </script>
-</body>
+    }
+    
+    initWidget();
+});
+</script>
+  </body>
 </html>
